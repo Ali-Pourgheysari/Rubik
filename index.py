@@ -396,6 +396,19 @@ def turn_to_dic(input_list):
         output_dic[item[1][1][:1]] = item
     return output_dic
 
+def write_output(JSON_name, list):
+    output = {
+        'w': list.state['w'],
+        'r': list.state['r'],
+        'g': list.state['g'],
+        'o': list.state['o'],
+        'y': list.state['y'],
+        'b': list.state['b']
+    }
+
+    with open(JSON_name, 'a') as f:
+        json.dump(output, f)
+
 if __name__ == "__main__":
     initial_list = []
     final_list = []
@@ -407,3 +420,10 @@ if __name__ == "__main__":
     initial_state = RubickState(turn_to_dic(initial_list))
     final_state = RubickState(turn_to_dic(final_list))
     path = A_star(initial_state, final_state)
+
+    output = {'steps' : str(len(path)-1)}
+    with open(output_file_name, 'w') as f:
+        json.dump(output, f)
+
+    for item in path:
+        write_output(output_file_name, item)
