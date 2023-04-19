@@ -237,4 +237,45 @@ class RubickState:
         return temp_state
 
 
+    def get_neighbors(self):
+        neighbors = []
+        for color in self.state:
+            neighbors.append(self.rotate_clockwise(color))
+            neighbors.append(self.rotate_counter_clockwise(color))
+        return neighbors
+    
+    def __lt__(self, other):
+        return False
 
+
+def get_input(JSON_name):
+    initial_list = []
+    final_list = []
+
+    with open(JSON_name) as f:
+        data = json.load(f)
+
+    for color in ['w', 'r', 'g', 'o', 'y', 'b']:
+        initial_list.append(data['start'][color])
+        final_list.append(data['end'][color])
+
+    return initial_list, final_list
+
+def turn_to_dic(input_list):
+    output_dic = {}
+    for item in input_list:
+        output_dic[item[1][1][:1]] = item
+    return output_dic
+
+
+if __name__ == "__main__":
+    initial_list = []
+    final_list = []
+
+    JSON_name = input("Enter the name of the JSON file: ")
+    output_file_name = 'output.json'
+
+    initial_list, final_list = get_input(JSON_name)
+    initial_state = RubickState(turn_to_dic(initial_list))
+    final_state = RubickState(turn_to_dic(final_list))
+    
