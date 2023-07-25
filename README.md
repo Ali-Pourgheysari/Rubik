@@ -10,4 +10,7 @@
 
 4. The heuristic function used to guide the A* search is based on the Manhattan distance between the current state and the final state of the Rubik's Cube. The number of colors next to each other is also considered in the heuristic calculation. The better heuristic would be the sum of number of moves needed to move each color to its correct position, but this would require a lot of computation. 
 
+Read the complete documentation [HERE](Documentation.pdf).
+Also you can read [THIS](code_review.pdf) code review for more details.
+
 Feel free to explore and optimize the Rubik's Cube solver with different initial states and experiment with alternative heuristic functions to improve its efficiency and performance. Happy cubing! 🧊
